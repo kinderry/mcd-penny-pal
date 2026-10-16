@@ -1,0 +1,35 @@
+# 凭证类文件：任何情况下都不要提交
+.env
+.env.*
+*.local.json
+mcp.json
+mcp-config.local.json
+token.txt
+secrets*
+
+# 运行产物
+output/
+reports/
+*.report.html
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 设计探索稿：不进公开仓库，保持提交干净
+assets/_explore/
+
+# 真实接口原始响应：含账号ID、收货地址、手机号等个人信息，禁止提交
+fixtures/raw/
+
+# 敏感字段扫描报告（内容就是 PII，必须留在 raw 里）
+fixtures/_pii_scan.md
+
+# 含第三方商标的素材：绝对禁止提交（合规红线）
+*含商标*
+*source-mascot*
+*trademark*
