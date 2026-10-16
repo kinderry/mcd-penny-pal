@@ -3,6 +3,8 @@
 > 本文件由 `fixtures/raw/_tools_list.json` 整理生成。参数以 `tools/list` 返回的 `inputSchema` 为准，**非人工猜测**。
 > 对接口径：`https://mcp.mcd.cn` · Streamable HTTP · 协议 `2025-06-18` · 实测 35 个工具
 > 参数后带 `*` 为必填。
+>
+> 这里全是接口事实，一句卖萌的话都没有 —— 查参数的时候，可爱是负资产。
 
 ## 券 · 四路券池
 

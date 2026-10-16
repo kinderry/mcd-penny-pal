@@ -92,14 +92,14 @@ def _headline(d: CouponDigest) -> str:
             tail = f"{prefix} {when} 就到期啦"
         else:
             tail = "今天就到期啦"
-        return f"哎呀，你有 {len(today)} 张券{tail}！"
+        return f"哎呀哎呀！你有 {len(today)} 张券券，{tail}！"
 
     if soon:
         days = min(a.days_left for a in soon if a.days_left is not None)
-        return f"有 {len(soon)} 张券 {days} 天内到期啦，趁还记得快看看呀。"
+        return f"有 {len(soon)} 张券券，{days} 天内就到期了哦。快看看呀！"
 
     if d.audits:
-        return f"券包里有 {len(d.audits)} 张券，暂时都还安全哦。"
+        return f"券包里有 {len(d.audits)} 张券券，暂时都还安全哦。"
 
     return "券包空空的，一张都没有呢。"
 
@@ -120,7 +120,7 @@ def _untally_line(valuation: Valuation | None, audits: list[CouponAudit]) -> lis
     if not missing or len(missing) == len(audits):
         return []  # 全都能估 或 全都不能估，这里不用解释
     names = "、".join(f"「{t}」" for t in missing)
-    return [f"{names}这几张小省还没算出来，等你要点了我再去算哈～", ""]
+    return [f"{names}这几张小省还没算出来哦，等你要点了我再去算哈～", ""]
 
 
 def _value_line(summary: GroupSummary, count: int) -> str:
@@ -131,11 +131,11 @@ def _value_line(summary: GroupSummary, count: int) -> str:
     """
     if summary.complete:
         if count == 1:
-            return f"这张能省 {summary.total_text}，是拿实时菜单算过的哦。"
-        return f"这 {count} 张加起来能省 {summary.total_text}，是拿实时菜单算过的哦。"
+            return f"这张能省 {summary.total_text} 哦。是拿实时菜单算过的，真的！"
+        return f"这 {count} 张加起来能省 {summary.total_text} 哦。是拿实时菜单算过的，真的！"
     return (
         f"{len(summary.values)} 张核过价啦，能省 {summary.total_text}；"
-        f"还有 {len(summary.unpriced)} 张小省没算出来，先不写进来，不骗你。"
+        f"还有 {len(summary.unpriced)} 张小省没算出来，先不写进来，不骗你哦。"
     )
 
 
@@ -151,9 +151,9 @@ def _face_note(summary: GroupSummary) -> list[str]:
     lines = []
     for v in bad:
         lines.append(
-            f"「{v.title}」要小小声说一句：券面写着 ¥{v.face_yuan:g}，"
-            f"实际只能省 {v.saving_text} 哦。券面那个数字是用券后的价，"
-            f"不是省下来的钱，不要被它骗到啦。"
+            f"「{v.title}」小省要小小声跟你说哦：券面写着 ¥{v.face_yuan:g}，"
+            f"可是实际只能省 {v.saving_text}。"
+            f"券面那个数字是用券后的价，不是省下来的钱，不要被它骗到啦！"
         )
     lines.append("")
     return lines
@@ -168,7 +168,7 @@ def _urgent_block(d: CouponDigest, valuation: Valuation | None = None) -> list[s
         summary = (
             valuation.summarize([a.title for a in today]) if valuation else None
         )
-        head = f"券包里一共 {d.total} 张，今天就没了的是这 {len(today)} 张"
+        head = f"券包里有 {d.total} 张券券哦，今天就没了的是这 {len(today)} 张"
         if summary is not None and summary.any:
             head += "（钱都按实时菜单算过，不是券面那个数）"
         lines.append(head + "：")
@@ -188,8 +188,8 @@ def _urgent_block(d: CouponDigest, valuation: Valuation | None = None) -> list[s
             if priced:
                 amounts = "、".join(p[1] for p in priced)
                 lines.append(
-                    f"券面标的是 {amounts}。能不能真省下这些，"
-                    f"小省得拿实时菜单试一遍才算数，先不写进来哈。"
+                    f"券面标的是 {amounts} 哦。能不能真省下这些，"
+                    f"小省得拿实时菜单试一遍才算数。先不写进来，不骗你呀。"
                 )
                 lines.append("")
 
@@ -197,7 +197,7 @@ def _urgent_block(d: CouponDigest, valuation: Valuation | None = None) -> list[s
         summary = (
             valuation.summarize([a.title for a in soon]) if valuation else None
         )
-        lines.append(f"券包里一共 {d.total} 张，这 {len(soon)} 张在 {BUCKET_SOON}：")
+        lines.append(f"券包里有 {d.total} 张券券哦，这 {len(soon)} 张在 {BUCKET_SOON}：")
         lines.append("")
         for a in soon:
             lines.append(f"{_item_line(a, valuation)}（{a.expiry_label}）")
@@ -226,7 +226,7 @@ def _soon_mention(d: CouponDigest, valuation: Valuation | None = None) -> list[s
             v = valuation.get(a.title) if valuation else None
             tag = f"（省 {v.saving_text}）" if v is not None else ""
             parts.append(f"{when}「{a.title}」{tag}")
-        head = f"另外这 {len(d.soon)} 张也在倒计时哦："
+        head = f"对啦对啦，这 {len(d.soon)} 张券券也在倒计时哦："
         # 全部可估价时补一句总账；估不全就只给单张，不给合计
         tail = ""
         if valuation is not None:
@@ -234,7 +234,7 @@ def _soon_mention(d: CouponDigest, valuation: Valuation | None = None) -> list[s
             if s.complete and len(d.soon) > 1:
                 tail = f"，加起来还能省 {s.total_text}"
         return [head + "、".join(parts) + tail + "。", ""]
-    return [f"另外还有 {len(d.soon)} 张券在这几天内陆续到期。", ""]
+    return [f"另外还有 {len(d.soon)} 张券券，这几天里会陆续到期哦。", ""]
 
 
 def _expired_block(d: CouponDigest) -> list[str]:
@@ -242,7 +242,7 @@ def _expired_block(d: CouponDigest) -> list[str]:
     if not d.expired:
         return []
     names = "、".join(f"「{a.title}」" for a in d.expired)
-    return [f"还有 {len(d.expired)} 张已经过期了：{names}，用不上了呢。", ""]
+    return [f"呜呜，还有 {len(d.expired)} 张已经过期了：{names}，用不上了呢。", ""]
 
 
 def _points_block(account: PointsAccount | None) -> list[str]:
@@ -253,12 +253,12 @@ def _points_block(account: PointsAccount | None) -> list[str]:
     lines: list[str] = []
     if account.expired > 0:
         lines.append(
-            f"积分也要说一句：能用的只剩 {_num(account.available)} 了，"
+            f"积分也要说一句哦：能用的只剩 {_num(account.available)} 了，"
             f"已经过期掉 {_num(account.expired)} 分。攒着不用，它是真的会没的哦。"
         )
         lines.append("")
     elif account.available > 0:
-        lines.append(f"积分可用 {_num(account.available)} 哦。")
+        lines.append(f"积分还能用 {_num(account.available)} 哦。")
         lines.append("")
 
     return lines
@@ -271,7 +271,7 @@ def _claimable_block(d: CouponDigest) -> list[str]:
     if d.urgent:
         return []  # 已经在救火，就别再塞新任务了
     return [
-        f"对啦，麦麦省里还有 {d.claimable_count} 张可以领，"
+        f"对啦对啦，麦麦省里还有 {d.claimable_count} 张可以领哦，"
         f"要不要小省一起收进券包呀？",
         "",
     ]
@@ -282,7 +282,7 @@ def _closing(d: CouponDigest) -> str:
         return "要小省帮你算算今天这一单怎么点最省吗？给个预算，我来比。"
     if d.claimable_count > 0:
         return "要小省看看麦麦省现在有什么能领的吗？"
-    return "现在没有可用的券。等有新券到手，小省第一时间叫你。"
+    return "现在没有可用的券哦。等有新券到手，小省第一时间叫你。"
 
 
 def build_briefing(

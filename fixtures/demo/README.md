@@ -1,7 +1,9 @@
 # fixtures/demo —— 可公开的脱敏返回
 
-这里的每个文件都是 **2026-10-16 对 `mcp.mcd.cn` 的真实返回**，由 `tools/smoke.py` 原样落盘，
-再经 `tools/make_demo_fixtures.py` 脱敏后生成。
+这里每个文件都是 **2026-10-16 对 `mcp.mcd.cn` 的真实返回**哦 —— 由 `tools/smoke.py`
+原样落盘，再经 `tools/make_demo_fixtures.py` 脱敏后生成的。一个字符都没有编。
+
+（这份说明是写给要接手代码的人看的，所以语气收着写。下面的字段表保持精确。）
 
 ## 脱敏删了什么
 

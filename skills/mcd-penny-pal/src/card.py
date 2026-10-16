@@ -87,17 +87,17 @@ def _hero(d: CouponDigest) -> tuple[str, str]:
     if d.today:
         times = [t for t in (_hhmm(a.expire_at) for a in d.today) if t]
         when = f"今晚 {max(times)} 就作废" if len(set(times)) == 1 and times else "今天就作废"
-        return when, f"你手上 {d.total} 张券，今天有 {len(d.today)} 张要溜走"
+        return when, f"你手上有 {d.total} 张券券，今天 {len(d.today)} 张要溜走啦"
     if d.soon:
         days = sorted({a.days_left for a in d.soon if a.days_left and a.days_left > 0})
         soonest = f"{days[0]} 天后" if days else "很快"
         first = d.soon[0]
-        return f"最快 {soonest} 到期", f"{first.title} 打头，一共 {len(d.soon)} 张在倒计时"
+        return f"最快 {soonest} 到期", f"{first.title} 打头，一共 {len(d.soon)} 张券券在倒计时"
     if d.usable:
-        return f"手上 {len(d.usable)} 张券", "暂时都没有快到期的，可以安心哦"
+        return f"手上有 {len(d.usable)} 张券券", "暂时都没有快到期的，安心安心"
     if d.audits:
-        return "券都用完了", f"{len(d.audits)} 张券已经过期，新的还没进来"
-    return "券包空空的", "麦麦省有券可领的时候，小省先叫你"
+        return "券券都用完了", f"{len(d.audits)} 张已经过期，新的还没来哦"
+    return "券包空空的", "麦麦省有券可领的时候，小省先叫你呀"
 
 
 def _number_block(d: CouponDigest, summary: GroupSummary | None) -> tuple[str, str, str]:
@@ -114,14 +114,14 @@ def _number_block(d: CouponDigest, summary: GroupSummary | None) -> tuple[str, s
         return (
             summary.total_text,
             headline,
-            f"这 {summary.count} 张券都按实时菜单核过价哦",
+            f"这 {summary.count} 张券券都按实时菜单核过价哦",
         )
 
     # 只核到一部分：只说这一部分，并明说还有没核的
     return (
         summary.total_text,
         f"这是已核价的 {len(summary.values)} 张",
-        f"另外 {len(summary.unpriced)} 张小省还没核到价，不瞎写",
+        f"另外 {len(summary.unpriced)} 张小省还没核到价，不瞎写哦",
     )
 
 
@@ -154,7 +154,7 @@ def _gap_note(summary: GroupSummary, *, threshold_yuan: float = 3.0) -> str:
     if face is None:
         return ""
     return (
-        f"「{worst.title}」券面写着 ¥{face:g}，实际只能省 {worst.saving_text}。"
+        f"「{worst.title}」券面写着 ¥{face:g}，实际只能省 {worst.saving_text} 哦。"
         "券面那个数字是用券后的价，不是省下来的钱"
     )
 
@@ -293,8 +293,8 @@ _TEMPLATE = """<!DOCTYPE html>
   <div class="foot">
 {avatar}
     <div class="say">
-      <div class="l1">每天帮你看一眼，该花的花，该省的省</div>
-      <div class="l2">每个数字都来自实时计价，不估算、不编造</div>
+      <div class="l1">每天帮你看一眼券券，该花的花，该省的省呀</div>
+      <div class="l2">每个数字都来自实时计价，不估算、不编造哦</div>
 {url}
     </div>
   </div>
@@ -406,7 +406,7 @@ def build_card(
         days = [a.days_left for a in d.soon if a.days_left is not None and a.days_left > 0]
         soonest = f"最快 {min(days)} 天后" if days else "稍后"
         more_html = (
-            f'  <div class="more">另外还有 {len(d.soon)} 张券在倒计时，{_esc(soonest)}就到期哦</div>'
+            f'  <div class="more">对啦，还有 {len(d.soon)} 张券券在倒计时，{_esc(soonest)}就到期哦</div>'
         )
 
     note_html = ""
