@@ -128,15 +128,16 @@ partial = V.value_book([deal("中薯条买一送一", 1350, 2700, 1350)],
                        [fries, snack, shake])
 d_mix = C.digest(mine=[fries, snack], now=NOW)
 text_mix = B.build_briefing(d_mix, valuation=partial, now=NOW)
-check("部分可估时说明还有几张没核到", "我还没核到价" in text_mix,
-      [l for l in text_mix.splitlines() if "没核到" in l][:1])
+check("部分可估时说明还有几张没核到",
+      any(("没核到" in l or "没算出来" in l) for l in text_mix.splitlines()),
+      [l for l in text_mix.splitlines() if "没核到" in l or "没算出来" in l][:1])
 check("部分可估时不报总额", "加起来能省" not in text_mix, "")
 check("核不到的「王牌小食拼」旁没有金额",
       not re.search(r"王牌小食拼（省 ", text_mix), "")
 
 # —— 没传 valuation 时退回券面口径，且不出现"M2 式"断言
 text_plain = B.build_briefing(d_mix, now=NOW)
-check("无实测值时退回券面口径", "券面标注分别是" in text_plain, "")
+check("无实测值时退回券面口径", "券面标的是" in text_plain, "")
 check("无实测值时不谎称已核实", "加起来能省" not in text_plain, "")
 
 
