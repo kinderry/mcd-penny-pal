@@ -175,6 +175,7 @@ mcd-penny-pal/
 ├── README.md                     本文件
 ├── MCP_INTEGRATION.md            调了哪些 Tool、调用时序、业务价值
 ├── CONTEST_DECLARATION.md        参赛声明（官方原文）
+├── LICENSE                       MIT 许可证
 ├── workbuddy.md                  WorkBuddy 对话上下文
 ├── mcp-config.example.json       接入配置样例（仅环境变量占位，无真实凭证）
 ├── fixtures/
@@ -237,6 +238,15 @@ python tools/run_card.py --live
 - 仓库里**不含**任何真实 Token、账号 ID、收货地址、手机号
 - 所有餐品信息、价格、供应状态以麦当劳官方渠道实时结果为准；本项目输出仅供参考，不构成营养或医疗建议
 
+## 许可证
+
+本项目代码以 **[MIT](LICENSE)** 开源：可以自由使用、修改、分发，只需保留版权与许可声明。
+
+需要注意 MIT 的覆盖边界：
+
+- 麦当劳的名称、商标、品牌标识，以及 MCP 接口返回的内容，**权利归麦当劳所有**，MIT 不覆盖
+- 本项目是参赛作品，与麦当劳官方**没有隶属或背书关系**
+
 <div align="center">
-<sub>麦当劳程序员节创意开发大赛参赛作品 · 由 <a href="https://github.com/kinderry">@kinderry</a> 独立开发</sub>
+<sub>麦当劳程序员节创意开发大赛参赛作品 · 由 <a href="https://github.com/kinderry">@kinderry</a> 独立开发 · MIT License</sub>
 </div>
