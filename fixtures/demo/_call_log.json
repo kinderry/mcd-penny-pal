@@ -1,0 +1,97 @@
+[
+  {
+    "tool": "now-time-info",
+    "arguments": {},
+    "seconds": 0.155,
+    "ok": true,
+    "payload_type": "str"
+  },
+  {
+    "tool": "query-my-account",
+    "arguments": {},
+    "seconds": 0.146,
+    "ok": true,
+    "payload_type": "str"
+  },
+  {
+    "tool": "query-my-coupons",
+    "arguments": {
+      "page": 1,
+      "pageSize": 20
+    },
+    "seconds": 1.738,
+    "ok": true,
+    "payload_type": "str"
+  },
+  {
+    "tool": "available-coupons",
+    "arguments": {},
+    "seconds": 0.146,
+    "ok": true,
+    "payload_type": "str"
+  },
+  {
+    "tool": "campaign-calendar",
+    "arguments": {},
+    "seconds": 0.33,
+    "ok": true,
+    "payload_type": "str"
+  },
+  {
+    "tool": "list-nutrition-foods",
+    "arguments": {},
+    "seconds": 0.171,
+    "ok": true,
+    "payload_type": "str"
+  },
+  {
+    "tool": "query-lottery-info",
+    "arguments": {},
+    "seconds": 0.218,
+    "ok": true,
+    "payload_type": "str"
+  },
+  {
+    "tool": "mall-points-products",
+    "arguments": {},
+    "seconds": 0.218,
+    "ok": true,
+    "payload_type": "str"
+  },
+  {
+    "tool": "order-list",
+    "arguments": {},
+    "seconds": 0.159,
+    "ok": true,
+    "payload_type": "str"
+  },
+  {
+    "tool": "delivery-query-addresses",
+    "arguments": {},
+    "seconds": 0.155,
+    "ok": true,
+    "payload_type": "str"
+  },
+  {
+    "tool": "query-nearby-stores",
+    "arguments": {
+      "beType": 1,
+      "searchType": 1
+    },
+    "seconds": 0.146,
+    "ok": true,
+    "payload_type": "str"
+  },
+  {
+    "tool": "query-nearby-stores",
+    "arguments": {
+      "beType": 1,
+      "searchType": 2,
+      "city": "上海",
+      "keyword": "南京西路"
+    },
+    "seconds": 0.395,
+    "ok": true,
+    "payload_type": "str"
+  }
+]
